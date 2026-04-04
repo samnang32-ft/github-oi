@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HUT SAMNANG | Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-morph {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #005bbf 0%, #33a0fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-brand-gradient {
+            background: linear-gradient(135deg, #005bbf 0%, #1a73e8 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "error": "#ba1a1a",
+                "surface": "#fbf9f9",
+                "inverse-primary": "#adc7ff",
+                "surface-dim": "#dbdad9",
+                "on-tertiary-fixed-variant": "#930005",
+                "outline": "#727785",
+                "on-secondary-fixed-variant": "#00497d",
+                "outline-variant": "#c1c6d6",
+                "secondary-container": "#33a0fd",
+                "primary-fixed-dim": "#adc7ff",
+                "on-secondary": "#ffffff",
+                "on-primary-container": "#ffffff",
+                "error-container": "#ffdad6",
+                "secondary-fixed-dim": "#9ecaff",
+                "on-primary": "#ffffff",
+                "on-surface": "#1b1c1c",
+                "on-tertiary-fixed": "#410001",
+                "tertiary": "#bb1613",
+                "background": "#fbf9f9",
+                "on-secondary-container": "#00355c",
+                "on-error-container": "#93000a",
+                "tertiary-fixed-dim": "#ffb4a9",
+                "primary-container": "#1a73e8",
+                "on-surface-variant": "#414754",
+                "on-primary-fixed-variant": "#004493",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-low": "#f5f3f3",
+                "surface-container-high": "#e9e8e7",
+                "surface-container": "#efeded",
+                "primary": "#005bbf",
+                "inverse-surface": "#303031",
+                "surface-tint": "#005bc0",
+                "surface-variant": "#e3e2e2",
+                "tertiary-container": "#df3429",
+                "inverse-on-surface": "#f2f0f0",
+                "primary-fixed": "#d8e2ff",
+                "secondary": "#0061a4",
+                "secondary-fixed": "#d1e4ff",
+                "surface-container-highest": "#e3e2e2",
+                "tertiary-fixed": "#ffdad5",
+                "on-error": "#ffffff",
+                "on-tertiary-container": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed": "#001d36",
+                "on-primary-fixed": "#001a41",
+                "surface-bright": "#fbf9f9",
+                "on-background": "#1b1c1c"
+              },
+              fontFamily: {
+                "headline": ["Manrope"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface font-body text-on-surface">
+    <!-- Top Navigation Bar -->
+    <nav class="flex justify-between items-center px-8 py-4 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl rounded-full mt-6 mx-auto max-w-5xl sticky top-6 shadow-xl shadow-blue-900/5">
+    <div class="text-xl font-extrabold tracking-tighter text-slate-900 dark:text-white">HUT SAMNANG</div>
+    <div class="hidden md:flex gap-8">
+    <a class="text-blue-700 dark:text-blue-400 font-extrabold border-b-2 border-blue-600 font-manrope text-sm tracking-tight transition-transform duration-300 hover:scale-105" href="#">Portfolio</a>
+    <a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors font-manrope text-sm tracking-tight transition-transform duration-300 hover:scale-105" href="about.html">About</a>
+    <a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors font-manrope text-sm tracking-tight transition-transform duration-300 hover:scale-105" href="skill.html">Skills</a>
+    <a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-colors font-manrope text-sm tracking-tight transition-transform duration-300 hover:scale-105" href="contact.html">Contact</a>
+    </div>
+    <button class="bg-brand-gradient text-white px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-transform duration-300 scale-95 duration-200 ease-in-out">
+                Get in Touch
+            </button>
+    </nav>
+    <main class="max-w-7xl mx-auto px-8">
+    <!-- Hero Section -->
+    <section class="flex flex-col md:flex-row items-center justify-between min-h-[870px] py-20 gap-12">
+    <div class="flex-1 space-y-8">
+    <div class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold tracking-widest uppercase">
+                        Available for Projects
+                    </div>
+    <h1 class="font-headline text-7xl font-extrabold text-on-surface leading-[1.1] tracking-tight">
+                        Hello, <span class="text-gradient">HUT SAMNANG</span> here.
+                    </h1>
+    <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed">
+                        Senior Product Designer and Creative Developer building fluid digital experiences that bridge the gap between aesthetics and function.
+                    </p>
+    <div class="flex items-center gap-6 pt-4">
+    <button class="bg-brand-gradient text-on-primary h-12 px-8 rounded-full font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all">
+                            View Projects
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+    </button>
+    <button class="h-12 px-8 rounded-full font-bold text-primary border-2 border-outline-variant/30 hover:bg-surface-container-low transition-all">
+                            Read Bio
+                        </button>
+    </div>
+    </div>
+    <div class="flex-1 relative group">
+    <div class="absolute -inset-4 bg-primary/10 rounded-xl -rotate-2 group-hover:rotate-0 transition-transform duration-500"></div>
+    <div class="absolute -inset-4 bg-secondary-container/10 rounded-xl rotate-3 group-hover:rotate-0 transition-transform duration-500"></div>
+    <img alt="Hut samnang - Professional Portrait" class="relative z-10 w-full aspect-[4/5] object-cover rounded-xl shadow-2xl" data-alt="A monk in a red robe sitting at a desk and using a laptop in a classroom setting, representing the intersection of tradition and technology." src="https://lh3.googleusercontent.com/a/ACg8ocIBs0II3rIw6T7KKktIXR5KlpFqM3gBH7G8c3GSnukrIzv6tFt5=s360-c-no"/>
+    </div>
+    </section>
+    <!-- About Me Section -->
+    <section class="py-32 grid md:grid-cols-2 gap-20 items-center">
+    <div class="order-2 md:order-1">
+    <img alt="Tech Setup" class="w-full aspect-square object-cover rounded-xl shadow-xl" data-alt="ultra-minimalist home office setup with a high-end monitor, sleek keyboard, and soft morning sunlight filtering through blinds, modern aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2-YKZV4KbQKvbyw-KKbFpEQ6B1RSX1N5ct2jeQ8fScroDgEIt09_L4XTmQFEr_TYy4HMSDt_n7HvqTBxvLs3gHWTF98o6sjnNyyjKJuL8gR977LH4-XkE0X60T9dL_Y7z2y6y0W2e7WkSP4Rd3OAHilV0gXnewbnnTw-Nwr8Zl3JotB8n-KUp3rWFKdcYoIlP8eO48QgY6A5XYK_bkY73NJKD4lVS61OdmoS9S-wy9jLEoakFLt2S5gWeB7IZSGuLgOfDtlSoSYo"/>
+    </div>
+    <div class="order-1 md:order-2 space-y-8">
+    <h2 class="font-headline text-4xl font-bold">Deep Work &amp; <span class="text-primary">Fluid Intent</span>.</h2>
+    <p class="text-lg leading-relaxed text-on-surface-variant">
+                        A UI/UX and coding expert with over a decade of experience. I focus on streamlining complex systems into interfaces that are simple, beautiful, and highly efficient..
+                    </p>
+    <div class="grid grid-cols-2 gap-8">
+    <div>
+    <div class="text-primary font-extrabold text-3xl mb-1">10+</div>
+    <div class="text-sm font-bold text-on-surface/60 uppercase tracking-widest">Projects Delivered</div>
+    </div>
+    <div>
+    <div class="text-primary font-extrabold text-3xl mb-1">2+</div>
+    <div class="text-sm font-bold text-on-surface/60 uppercase tracking-widest">Global Awards</div>
+    </div>
+    </div>
+    <p class="italic text-on-surface/70 border-l-4 border-primary pl-6 py-2">
+                        "SAMNANG doesn't just build websites; they build digital legacies that stand the test of evolving design trends."
+                    </p>
+    </div>
+    </section>
+    <!-- Technical Arsenal (Bento Grid) -->
+    <section class="py-24">
+    <div class="text-center mb-16">
+    <h2 class="font-headline text-4xl font-bold mb-4">Technical Arsenal</h2>
+    <p class="text-on-surface-variant">The modern tools and frameworks I leverage to build the future.</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <!-- Skill Tag -->
+    <div class="bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-primary-container group transition-all duration-300">
+    <span class="material-symbols-outlined text-4xl text-primary group-hover:text-on-primary">code</span>
+    <span class="font-bold group-hover:text-on-primary">React</span>
+    </div>
+    <div class="bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-primary-container group transition-all duration-300">
+    <span class="material-symbols-outlined text-4xl text-primary group-hover:text-on-primary">terminal</span>
+    <span class="font-bold group-hover:text-on-primary">TypeScript</span>
+    </div>
+    <div class="bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-primary-container group transition-all duration-300">
+    <span class="material-symbols-outlined text-4xl text-primary group-hover:text-on-primary">palette</span>
+    <span class="font-bold group-hover:text-on-primary">Tailwind CSS</span>
+    </div>
+    <div class="bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-primary-container group transition-all duration-300">
+    <span class="material-symbols-outlined text-4xl text-primary group-hover:text-on-primary">draw</span>
+    <span class="font-bold group-hover:text-on-primary">Figma UI/UX</span>
+    </div>
+    <div class="bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-primary-container group transition-all duration-300">
+    <span class="material-symbols-outlined text-4xl text-primary group-hover:text-on-primary">database</span>
+    <span class="font-bold group-hover:text-on-primary">Node.js</span>
+    </div>
+    <div class="bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-primary-container group transition-all duration-300">
+    <span class="material-symbols-outlined text-4xl text-primary group-hover:text-on-primary">cloud</span>
+    <span class="font-bold group-hover:text-on-primary">AWS Cloud</span>
+    </div>
+    <div class="bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-primary-container group transition-all duration-300">
+    <span class="material-symbols-outlined text-4xl text-primary group-hover:text-on-primary">animation</span>
+    <span class="font-bold group-hover:text-on-primary">Framer Motion</span>
+    </div>
+    <div class="bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-primary-container group transition-all duration-300">
+    <span class="material-symbols-outlined text-4xl text-primary group-hover:text-on-primary">monitoring</span>
+    <span class="font-bold group-hover:text-on-primary">Analytics</span>
+    </div>
+    </div>
+    </section>
+    <!-- Selected Work -->
+    <section class="py-32">
+    <div class="flex justify-between items-end mb-16">
+    <div>
+    <h2 class="font-headline text-5xl font-extrabold mb-4">Selected Work</h2>
+    <p class="text-on-surface-variant max-w-md">A curation of projects that defined my creative trajectory.</p>
+    </div>
+    <a class="text-primary font-bold flex items-center gap-2 hover:underline" href="#">
+                        View Archive
+                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+    </a>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12">
+    <!-- Project 1 -->
+    <div class="group cursor-pointer">
+    <div class="overflow-hidden rounded-xl bg-surface-container-high mb-6 shadow-sm">
+    <img alt="Lumina Fintech" class="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-700" data-alt="clean dashboard user interface for a fintech application with soft blue charts, white surfaces, and modern typography in high resolution" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgeXrL9xuoM6YKfB4hkgFxk_GbQLvRSb6AgbsOpV_sq07HeAh4ktlcPWkNrrpMX_XR8kgQdNgv2XWZcYCvSh699ZuENzMoS_JIpoloXZPbzJAP15KS5yqEqnq9Ij7_Pm7QaZPB_t6T6-38hoeLggH7x-ApiZSIpwajaw6yfi2VliBDWOv0E931xvqNHcHF4bUuRnoB66RIvmHVzpKPftlGapRuHbkembxMOv0BWrRMjEn9LnLpBr77_jS8bd4ROl3LE5aeL78g88Q"/>
+    </div>
+    <div class="flex justify-between items-start">
+    <div>
+    <h3 class="text-2xl font-bold mb-2">Lumina Fintech</h3>
+    <p class="text-on-surface-variant">Reimagining decentralized banking for the next generation.</p>
+    </div>
+    <div class="flex gap-2">
+    <span class="bg-surface-container-highest px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Fintech</span>
+    <span class="bg-surface-container-highest px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">UI/UX</span>
+    </div>
+    </div>
+    </div>
+    <!-- Project 2 -->
+    <div class="group cursor-pointer">
+    <div class="overflow-hidden rounded-xl bg-surface-container-high mb-6 shadow-sm">
+    <img alt="Elysian AI" class="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-700" data-alt="abstract visualization of artificial intelligence using flowing translucent light ribbons in deep blue and purple tones, sleek tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJl72Eeo4e0qkF5ll-rRB761Oq5ge19IlIOSAObSBa3G3Tcbu5qfyl2XFBWRw6X5ZiNXdpn_4_SZxqkOlE8I8TQGnYJe2Tgn8QqJiZgWpQWga08f2bUzFX69Iw_ae_mwmU7iMfMsKTJoobGLE1zAjWwROxUkFz3osKFjtOy6dUfkPro75QtuXPbIav6mFuMAVaVYAeBOoeKHeWWCSEP6lXjVjNbRxYGaQbYv-sYj4hCCDaRTsIhYRncKSFBfyyFKIQJCvlr65glRQ"/>
+    </div>
+    <div class="flex justify-between items-start">
+    <div>
+    <h3 class="text-2xl font-bold mb-2">Elysian AI</h3>
+    <p class="text-on-surface-variant">Building the visual identity for a groundbreaking ML startup.</p>
+    </div>
+    <div class="flex gap-2">
+    <span class="bg-surface-container-highest px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">AI/ML</span>
+    <span class="bg-surface-container-highest px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Branding</span>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    </main>
+    <!-- Let's Build / Contact Section -->
+    <section class="bg-brand-gradient text-on-primary py-32 mt-20 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[120px] rounded-full -mr-48 -mt-48"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary-container/20 blur-[100px] rounded-full -ml-32 -mb-32"></div>
+    <div class="max-w-7xl mx-auto px-8 relative z-10">
+    <div class="flex flex-col items-center text-center max-w-3xl mx-auto space-y-10">
+    <h2 class="font-headline text-6xl font-extrabold tracking-tighter">Ready to build the future?</h2>
+    <p class="text-xl opacity-90 leading-relaxed">
+                        I'm currently accepting new projects and consulting opportunities. Let's discuss how we can bring your vision to life.
+                    </p>
+    <div class="flex flex-wrap justify-center gap-6">
+    <a class="bg-white text-primary h-14 px-10 rounded-full font-extrabold flex items-center gap-3 hover:scale-105 transition-transform shadow-xl" href="mailto:alex@rivers.com">
+                            Start a Conversation
+                            <span class="material-symbols-outlined">mail</span>
+    </a>
+    <a class="bg-white/10 backdrop-blur-md text-white h-14 px-10 rounded-full font-bold flex items-center gap-3 border border-white/20 hover:bg-white/20 transition-all" href="#">
+                            Check Calendar
+                        </a>
+    </div>
+    </div>
+    </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-slate-50 dark:bg-slate-950 full-width pt-20 pb-10">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="text-lg font-bold text-slate-900 dark:text-white">HUT SAMNANG</div>
+    <p class="font-inter text-sm text-slate-500 order-last md:order-none">© 2026 HUT SAMNANG. រចនាឡើងដោយភាពផ្ចិតផ្ចង់ និងវិជ្ជាជីវៈ.</p>
+    <div class="flex gap-8">
+    <a class="text-slate-400 hover:text-blue-500 font-inter text-sm transition-opacity opacity-80 hover:opacity-100 hover:underline decoration-blue-500 underline-offset-4" href="#">LinkedIn</a>
+    <a class="text-slate-400 hover:text-blue-500 font-inter text-sm transition-opacity opacity-80 hover:opacity-100 hover:underline decoration-blue-500 underline-offset-4" href="#">GitHub</a>
+    <a class="text-slate-400 hover:text-blue-500 font-inter text-sm transition-opacity opacity-80 hover:opacity-100 hover:underline decoration-blue-500 underline-offset-4" href="#">Dribbble</a>
+    <a class="text-slate-400 hover:text-blue-500 font-inter text-sm transition-opacity opacity-80 hover:opacity-100 hover:underline decoration-blue-500 underline-offset-4" href="#">Email</a>
+    </div>
+    </div>
+    </footer>
+</body></html>
