@@ -4,269 +4,527 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<title>Phone number divination rules</title>
+<title>ប្រព័ន្ធវិភាគទិន្នន័យលេខទូរស័ព្ទ</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Kantumruy Pro',sans-serif;
+/* --- 1. GLOBAL STYLES & BIG BACKGROUND --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kantumruy Pro', sans-serif;
 }
 
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
-    padding:20px;
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0f172a; 
+    background-image: 
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+    background-size: 35px 35px;
+    padding: 20px;
 }
 
-.card{
-    width:100%;
-    max-width:650px;
-    background:rgba(255,255,255,.1);
-    backdrop-filter:blur(15px);
-    border-radius:20px;
-    padding:30px;
-    color:white;
-    text-align:center;
+/* --- 2. DASHBOARD CONTAINER --- */
+.dashboard-container {
+    width: 100%;
+    max-width: 880px;
+    border-radius: 24px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.title{
-    font-size:30px;
-    font-weight:bold;
-    margin-bottom:15px;
+@media (max-width: 768px) {
+    .dashboard-container { grid-template-columns: 1fr; }
+    .panel-right { border-top: 1px solid rgba(255, 255, 255, 0.05); }
 }
 
-.subtitle{
-    margin-bottom:20px;
+/* --- 3. LEFT PANEL BACKGROUND (INPUTS) --- */
+.panel-left {
+    background: #1e293b; 
+    padding: 45px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-input{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    margin-bottom:15px;
-    font-size:18px;
+.brand-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
 }
 
-button{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    background:#22c55e;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: #38bdf8;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #38bdf8;
+    animation: blink 1.2s infinite ease-in-out;
+}
+@keyframes blink { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+.title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
 }
 
-button:hover{
-    background:#16a34a;
+.subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 35px;
+    line-height: 1.6;
 }
 
-.result{
-    display:none;
-    margin-top:30px;
-    background:rgba(15,23,42,.6);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:16px;
-    padding:22px;
-    animation:fadeIn .5s ease;
+input {
+    width: 100%;
+    padding: 16px 20px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    letter-spacing: 1px;
+    transition: all 0.25s ease;
+    margin-bottom: 20px;
 }
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+input:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
 }
 
-.number{
-    font-size:50px;
-    font-weight:bold;
-    color:gold;
+.btn-primary {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+    border: none;
+    border-radius: 12px;
+    color: #0f172a;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
 
-.detail{
-    margin-top:15px;
-    font-size:18px;
-    line-height:1.8;
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.35);
 }
 
+/* --- 4. RIGHT PANEL BACKGROUND --- */
+.panel-right {
+    background: #090d16; 
+    padding: 45px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.scan-line {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+    box-shadow: 0 0 15px #38bdf8;
+    animation: scanMove 1.5s ease-in-out infinite;
+    z-index: 5;
+}
+@keyframes scanMove {
+    0% { top: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+.placeholder-view {
+    color: #475569;
+    font-size: 15px;
+    text-align: center;
+}
+
+.display-view {
+    display: none;
+    width: 100%;
+    text-align: center;
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.circle-box {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    transition: box-shadow 0.5s ease;
+}
+
+.circle-box svg { transform: rotate(-90deg); }
+.circle-bg { fill: none; stroke: #1e293b; stroke-width: 6; }
+.circle-progress {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.circle-box .num-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.score-tag {
+    display: inline-block;
+    padding: 5px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 20px;
+    margin-bottom: 25px;
+}
+.tag-excellent { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+.tag-good { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+.tag-fair { background: rgba(203, 213, 225, 0.15); color: #cbd5e1; border: 1px solid rgba(203, 213, 225, 0.3); }
+.tag-poor { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+/* --- ៥. MULTI-DATA GRID --- */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.metric-card {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: left;
+}
+
+.metric-label {
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.metric-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.energy-bar-container {
+    width: 100%;
+    height: 4px;
+    background: #0f172a;
+    border-radius: 2px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+.energy-bar {
+    width: 0%;
+    height: 100%;
+    background: #38bdf8;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.data-summary {
+    background: #0f172a;
+    border-top: 2px solid #334155;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.6;
+    text-align: left;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 25px;
+}
+
+/* --- ៦. ACTION BUTTONS --- */
+.action-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+.btn-secondary {
+    padding: 12px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    color: #cbd5e1;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    
+    /* 🔴 កែប្រែបន្ថែម៖ ការពារកុំឱ្យមានបន្ទាត់ពីក្រោមអក្សរពេលប្តូរជា tag <a> */
+    text-decoration: none; 
+}
+
+.btn-secondary:hover {
+    background: #334155;
+    color: #ffffff;
+    border-color: #475569;
+}
 </style>
 </head>
 
 <body>
 
-<div class="card">
-
-    <div class="title">🔮 ក្បួនទស្សន៍ទាយលេខទូរស័ព្ទ</div>
-
-    <div class="subtitle">
-        បញ្ចូលលេខទូរស័ព្ទរបស់អ្នក
+<div class="dashboard-container">
+    
+    <div class="panel-left">
+        <div class="brand-status">
+            <div class="live-dot"></div>
+            <span>ប្រព័ន្ធវិភាគស្វ័យប្រវត្ត</span>
+        </div>
+        <div class="title">វិភាគលេខទូរស័ព្ទ</div>
+        <div class="subtitle">ស្វែងយល់ពីកម្រិតរាសី និងថាមពលនៃខ្សែទូរស័ព្ទរបស់អ្នក តាមរយៈការគណនាក្បួនតម្រាឌីជីថលចុងក្រោយបង្អស់។</div>
+        
+        <input 
+            type="tel" 
+            id="phone" 
+            placeholder="បញ្ចូលលេខទូរស័ព្ទរបស់អ្នក..." 
+            maxlength="10" 
+            inputmode="numeric">
+        
+        <button class="btn-primary" onclick="runAnalysis()">ចាប់ផ្តើមដំណើរការស្កេន</button>
     </div>
+    
+    <div class="panel-right" id="panelRight">
+        <div class="scan-line" id="scanLine"></div>
+        
+        <div class="placeholder-view" id="placeholderView">
+            <p>⏳ រង់ចាំការស្កេនទិន្នន័យ...</p>
+        </div>
+        
+        <div class="display-view" id="displayView">
+            <div class="circle-box" id="circleGlow">
+                <svg width="150" height="150">
+                    <circle class="circle-bg" cx="75" cy="75" r="65"></circle>
+                    <circle class="circle-progress" id="progressRing" cx="75" cy="75" r="65"></circle>
+                </svg>
+                <div class="num-text" id="finalNum">0</div>
+            </div>
+            
+            <div>
+                <span class="score-tag" id="scoreTag">លទ្ធផល</span>
+            </div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">ពិន្ទុថាមពល</div>
+                    <div class="metric-value" id="energyValue">0%</div>
+                    <div class="energy-bar-container">
+                        <div class="energy-bar" id="energyBar"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">សន្ទស្សន៍លាភ</div>
+                    <div class="metric-value" id="fortuneStars">✦✦✦✦</div>
+                </div>
+            </div>
+            
+            <div class="data-summary" id="summaryText">
+                លទ្ធផល។
+            </div>
 
-    <input
-        type="tel"
-        id="phone"
-        placeholder="ឧទាហរណ៍៖ 093927592"
-        maxlength="10"
-        pattern="[0-9]*"
-        inputmode="numeric">
-
-    <button onclick="predictPhone()">
-        ទស្សន៍ទាយឥឡូវនេះ
-    </button>
-
-    <div class="result" id="resultBox">
-
-        <div class="number" id="finalNumber"></div>
-
-        <div class="detail" id="description"></div>
-
+            <div class="action-group">
+                <a href="index.html" class="btn-secondary">🏠 ទំព័រដើម</a>
+                <a href="" class="btn-secondary">🔁 សាកម្តងទៀត</a>
+            </div>
+        </div>
+        
     </div>
 
 </div>
 
 <script>
-
-const results = {
-
-        1:"ល្អណាស់ = រីកចម្រើនល្អ អាចទទួលបានជ័យជំនះ",
-        2:"ធម្មតា = មានលាភមានបង់ មិនទទួលផលអ្វីច្រើន",
-        3:"ល្អណាស់ = មានភាពរីកចម្រើន អាចសម្រេចបានដូចបំណង",
-        4:"អាក្រក់ = អនាគតមានឧបសគ្គច្រើន លំបាកវេទនា",
-        5:"ល្អណាស់ = រកស៊ីមានបាន ទទួលបានកិត្តិយស និងផលប្រយោជន៍",
-        6: { type: "ល្អណាស់", detail: "មានសំណាងច្រើនអាចទទួលបានគុណសម្ត្រាតិធំ" },
-        7: { type: "ល្ង", detail: "មានចិត្តអត់ធុត់ពិតជាអាចទទួលបានជោគជ័យជំងឺ" },
-        8: { type: "ល្អ", detail: "អាចមានឪកាសទទួលបានជោគជ័យ" },
-        9: { type: "អាក្រក់", detail: "ឯកកោរ គ្មានអ្នកជួយពិបាកទទួលរទព្យមកវិញ" },
-        10: { type: "អាក្រក់", detail: "ខាតបង់ទឹកចិត្តនិងកម្លាំងទេ ខិតខំដោយឥតបានផល" },
-        11: { type: "ល្អ", detail: "មានលំនឹងល្អអ្នកដៃទច្រៀចសរសើរ" },
-        12: { type: "អាក្រក់", detail: "ទន់ខ្មោយធ្វើអ្វីក៏មិនបានសំរចដែរ" },
-        13: { type: "ល្អណាស់", detail: "មានសំណាងល្អក្តីសង្ឃឹមច្រើន" },
-        14: { type: "ធម្មតា", detail: "ជ័យជំនះ ឬហាជ័យពីងផ្អែកលើការតាំងចិត្តរបស់ខ្លួន" },
-        15: { type: "ល្អ", detail: "ជ័យជំនះច្រើនមានការរីកចំរើន" },
-        16: { type: "ល្អណាស់", detail: "អាចសំរចកិច្ចការធំបានទទួលទាំងកិត្តិយសទាំងផលប្រោយាជន៍" },
-        17: { type: "ល្អ", detail: "មានអ្នកធំជួយអាចទទួលបានជោគជ័យ" },
-        18: { type: "ល្អ", detail: "មានភាពរីកចចច្រើននឹងបានសំរចដូចបំណង" },
-        19: { type: "អាក្រក់", detail: "មានទំនាស់ច្រើនមានឧបសគ្គគ្រាប់ជំពូក" },
-        20: { type: "អាក្រក់", detail: "ឧបសគ្គច្រើនឈឺច្រើនពិបាកចិត្តច្រើន" },
-        21: { type: "ល្អ", detail: "ធ្វើការល្អិតល្អន់មានប្រាថ្នា" },
-        22: { type: "អាក្រក់ណាស់", detail: "ខាតបង់លាភធ្វើអ្វីក៏មិនបានសំរចដូចបំណងដែរ" },
-        23: { type: "ល្អណាស់", detail: "កិត្តិយសល្អសំរចកិច្ចការធំបាន" },
-        24: { type: "ល្អ", detail: "ពឹងផ្អែកលើសមត្ថភាពផ្ទាល់ខ្លួនអាចសច្រេចកិច្ចការបាន" },
-        25: { type: "ល្អណាស់", detail: "មានសំណាងល្អមានគេជួយ" },
-        26: { type: "អាក្រក់ណាស់", detail: "មានឧបសគ្គច្រើន" },
-        27: { type: "ល្អ", detail: "អាចមានលាកសំណាងនិងជ័យជំនះ" },
-        28: { type: "ល្អណាស់", detail: "សំឡើងខ្ពស់រកសុំមានបាន" },
-        29: { type: "អាក្រក់", detail: "សំណាងល្អនិងអាក្រក់ កើតមានឡើងព្រោមគ្នា" },
-        30: { type: "ល្អណាស់", detail: "ទទួលបាននូវលាកសំណាងនិងកិត្តិយស" },
-        31: { type: "ល្អណាស់", detail: "មានសំណាងអាចទទួលជោគជ័យ" },
-        32: { type: "ល្អ", detail: "មានប្រាជ្ញាល្បាស់ដែមានភាពរីកចម្រើនច្រើន" },
-        33: { type: "អាក្រក់ណាស់", detail: "ជួបឧបសគ្គមិនចេះអស់ពិបាកនឹងទទួលបានជោគជ័យ" },
-        34: { type: "ធម្មតា", detail: "ត្រូវមានលំនឹងចិត្តកុំលោកលន់" },
-        35: { type: "អាក្រក់", detail: "ឧបសគ្គច្រើនតែជួបភាពលំបាក និងក្រឡូត់" },
-        36: { type: "ល្អ", detail: "ឧបសគ្គអាចក្លាយជាសំណាងធ្វើអ្វីៗអាចបានដូចបំណង" },
-        37: { type: "ធម្មតា", detail: "អាចទទួលបាននូវកិត្តិយសតែពិបាកទទួលនូវលាកសំណាង" },
-        38: { type: "ល្អណាស់", detail: "អនាគតភ្លឺស្វាងត្រចះត្រចង់" },
-        39: { type: "ធម្មតា", detail: "មានសំណាងឬឧបសគ្គមានមិនទៀង" },
-        40: { type: "ល្អណាស់", detail: "មានសំណាងល្អអនាគតល្អហើយភ្លឺស្វាង ត្រចះត្រចង់" },
-        41: { type: "អាក្រក់", detail: "ការរកស៊ីត្រូវខាតបង់" },
-        42: { type: "ល្អ", detail: "បើមានចិត្តអត់ធុត់សំណាងអាក្រក់ អាចក្លាយជាមានលាក" },
-        43: { type: "អាក្រក់", detail: "ឡើងអ្វីៗពិបាកសម្រមចដូចបំណងប្រាថ្នា" },
-        44: { type: "ល្អ", detail: "មានសំណាងមានភាពរីកចម្រើន" },
-        45: { type: "ល្អណាស់", detail: "ជួបឧបសគ្គ មិនចេះអស់" },
-        46: { type: "ល្អណាស់", detail: "មានគេតាមជួយថែរក្សា អាចប្រកបមុខជំនួញបាន" },
-        47: { type: "ល្អណាស់", detail: "មានទាំងកិត្តិយសមានទាំងទ្រព្យសម្បត្តិ" },
-        48: { type: "ធម្មតា", detail: "មានឧបសគ្គហើយក៏មានសំណាងដែរ" },
-        49: { type: "ធម្មតា", detail: "មានឧបសគ្គហើយក៏មានសំណាងដែរ" },
-        50: { type: "ធម្មតា", detail: "មានឧបសគ្គហើយក៏មានសំណាងដែរ" }, 
-        51: { type: "ល្អ", detail: "ខិតខំនិងទទួលបានដោគជ័យ" },
-        52: { type: "អាក្រក់", detail: "ពេលបានលាកសំណាងនិងមានឧបសគ្គគាមមកពីក្រោយ" },
-        53: { type: "ធម្មតា", detail: "ខិតខំប្រឹងប្រែងខ្លាំងតែទទួលបានលទ្ធផលតិចតួច" },
-        54: { type: "អាក្រក់", detail: "ល្អតែសំបកក្រៅ តែតាមពិតមានឧបសគ្គ និងត្រារៈថ្នាក់" },
-        55: { type: "អាក្រក់ណាស់", detail: "ជួបឧបសគ្គ មិនចេះអស់ អាចមានត្រារៈថ្នាក់" },
-        56: { type: "ល្អ", detail: "ខិតខំប្រឹងប្រែងអាចតែប្រែនូវដោគវាសនា" },
-        57: { type: "ធម្មតា", detail: "មានឧបសគ្គត្រើន តែសំណាងល្អនឹងមកពីក្រោយ" },
-        58: { type: "អាក្រក់", detail: "ពេលជួបនិងបញ្ជាចិត្តតមិត្តនឹងរពិបាកសំរចចិត្ត" },
-        59: { type: "ធម្មតា", detail: "ចិត្តច្រកច្របល់ពិបាកសំរចចិត្ត" },
-        60: { type: "អាក្រក់", detail: "ជួបឧបសគ្គត្រើន" },
-        61: { type: "អាក្រក់", detail: "មានរៀងស្មុគស្មាញត្រើនពិបាកសំរចអ្វីៗដែលបានប៉ងទុក" },
-        62: { type: "ល្អ", detail: "ខិតខំនិងទទួលបាននូវផលប្រយោជន៍" },
-        63: { type: "អាក្រក់", detail: "ខំប្រឹង តែគ្មានទទួលបានផលប្រយោជន៍អ្វីឡើយ" },
-        64: { type: "ល្អ", detail: "មានសំណាងល្អអាចប្រកបមុខជំនួញបានធំ" },
-        65: { type: "ធម្មតា", detail: "ល្អ តែខ្លះទំនុកចិត្តលើខ្លួនឯង" },
-        66: { type: "ល្អណាស់", detail: "ធ្វើអ្វីៗតែងបានសំរចមាសប្រាក់ហួរចូលត្រើន" },
-        67: { type: "ល្អ", detail: "ប្រាសិនបើអាចក្តាប់ជាប់នូវឱកាសល្អអាចទទួលបានដោគជំនះ" },
-        68: { type: "អាក្រក់", detail: "ស្ថានភាពមិននឹងនអាចចាញ់ចោកគេ ជួបឧបសគ្គត្រើន" },
-        69: { type: "អាក្រក់", detail: "រកសុីខាតបង់ជួបភាពច្របូកច្របល់និងឧបសគ្គ" },
-        70: { type: "ធម្មតា", detail: "សំណាងល្អឬអាក្រក់អាស្រ័យលើភាពគ្មាបាន" },
-        71: { type: "ធម្មតា", detail: "សំណាងល្អនិងឧបសគ្គអាស្រ័យលើសកម្មភាព" }, // add 71 (missing but fill)
-        72: { type: "ល្អ", detail: "មានសុកម្មដ្ឋលនិងសំណាងល្អ" },
-        73: { type: "ធម្មតា", detail: "បើសិនជារុញរាពិបាកនិងទទួលជោគជំនះណាស់" },
-        74: { type: "ធម្មតា", detail: "មានសំណាងល្អណាស់ក៏មានសំណាងអាក្រក់ដែរ" },
-        75: { type: "អាក្រក់", detail: "ការងាររកសុីខាតបង់ឱកាស អស់ប្រពួសម្បត្តិ" },
-        76: { type: "ល្អ", detail: "ពិបាកមុនស្រួលណុករកាយ" },
-        77: { type: "ធម្មតា", detail: "មានលាកមានបង់មិនអាចសុកស្តីម្ត" },
-        78: { type: "ធម្មតា", detail: "អនាគតមិនសូវភ្លឺស្លាងទេហើយក៏មិនសូវមានប្រពួសម្បត្តិដែរ" },
-        79: { type: "អាក្រក់", detail: "បានហើយតែប្រោជាខាតបង់ទៅវិញខិតខំឥតប្រយោជន៍" },
-        80: { type: "ល្អណាស់", detail: "អាចទទួលបានជោគជ័យច្រើន" },
-
+// បញ្ជីទិន្នន័យតម្រាលេខពី ១ ដល់ ៨០ ពេញលេញ
+const divinationData = {
+    1: { type: "ល្អណាស់", score: 95, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "រីកចម្រើនល្អ អាចទទួលបានជ័យជំនះគ្រប់ច្រកល្ហក។" },
+    2: { type: "ធម្មតា", score: 50, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "មានលាភមានបង់ លទ្ធផលទទួលបានស្មើការខិតខំ មិនសូវសល់ច្រើនឡើយ។" },
+    3: { type: "ល្អណាស់", score: 92, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "មានភាពរីកចម្រើនខ្លាំង អាចសម្រេចបានដូចបំណងប្រាថ្នា។" },
+    4: { type: "អាក្រក់", score: 25, stars: "✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "អនាគតជួបឧបសគ្គច្រើន រកស៊ីលំបាក និងហត់នឿយខ្លាំង។" },
+    5: { type: "ល្អណាស់", score: 98, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "រកស៊ីមានបានដេកហូរហៀរ ទទួលបានកិត្តិយស និងផលប្រយោជន៍ខ្ពស់។" },
+    6: { type: "ល្អណាស់", score: 96, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "មានសំណាងធំធ្លាក់មកពីលើមេឃ និងទទួលបានគុណសម្បត្តិធំធេង។" },
+    7: { type: "ល្អ", score: 75, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "ទាមទារចិត្តអត់ធ្មត់ខ្ពស់ ទើបពិតជាអាចទទួលបានជោគជ័យនិងជ័យជំនះ។" },
+    8: { type: "ល្អ", score: 80, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "មានឱកាសល្អៗច្រើនហូរចូលមកក្នុងជីវិត ងាយទទួលបានជោគជ័យ។" },
+    9: { type: "អាក្រក់", score: 30, stars: "✦✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ជីវិតឯកកោ គ្មានអ្នកជួយជ្រោមជ្រែង ពិបាកប្រមូលទ្រព្យទុកណាស់។" },
+    10: { type: "អាក្រក់", score: 20, stars: "✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ខាតបង់ទាំងទឹកចិត្តនិងកម្លាំងកាយ ខិតខំធ្វើការតែឥតបានផល។" },
+    11: { type: "ល្អ", score: 78, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "មានលំនឹងជីវិតល្អ រស់នៅមានអ្នកដទៃកោតសរសើរនិងជួយជ្រោមជ្រែង។" },
+    12: { type: "អាក្រក់", score: 35, stars: "✦✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ចិត្តទន់ជ្រាយខ្វះភាពដាច់ខាត ធ្វើអ្វីក៏មិនសូវបានសម្រេចជោគជ័យដែរ។" },
+    13: { type: "ល្អណាស់", score: 90, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "មានសំណាងល្អពូនផ្ដុំ ជីវិតពោរពេញដោយក្ដីសង្ឃឹមខ្ពស់។" },
+    14: { type: "ធម្មតា", score: 55, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "ជ័យជំនះ ឬបរាជ័យ គឺស្ថិតនៅលើការតាំងចិត្តដ៏មោះមុតរបស់ខ្លួនឯង។" },
+    15: { type: "ល្អ", score: 82, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "ជ័យជំនះច្រើនហូរហែ មានការរីកចម្រើនលូតលាស់ជាលំដាប់។" },
+    16: { type: "ល្អណាស់", score: 94, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "អាចសម្រេចកិច្ចការធំៗបានដោយងាយ ទទួលទាំងកិត្តិយសនិងលុយកាក់។" },
+    17: { type: "ល្អ", score: 76, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "មានមនុស្សចាស់ ឬអ្នកធំកាងនៅពីក្រោយ ជួយឱ្យទទួលបានជោគជ័យ។" },
+    18: { type: "ល្អ", score: 84, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "មានភាពរីកចម្រើនទៅមុខជាប្រចាំ និងបានសម្រេចដូចបំណង។" },
+    19: { type: "អាក្រក់", score: 28, stars: "✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "មានទំនាស់និងរឿងរកាំរកូសច្រើន ជួបឧបសគ្គរារាំងគ្រប់ជំពូក។" },
+    20: { type: "អាក្រក់", score: 22, stars: "✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ឧបសគ្គច្រើន ងាយធ្លាក់ខ្លួនឈឺ និងមានរឿងពិបាកចិត្តច្រើន។" },
+    21: { type: "ល្អ", score: 72, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "ធ្វើការងារល្អិតល្អន់ល្អ មានការគិតគូរវែងឆ្ងាយគួរឱ្យសរសើរ។" },
+    22: { type: "អាក្រក់ណាស់", score: 15, stars: "❌", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ងាយខាតបង់លាភសក្ការៈ ធ្វើអ្វីក៏មិនបានសម្រេចដូចបំណងដែរ។" },
+    23: { type: "ល្អណាស់", score: 91, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "ឈ្មោះសំឡេងល្បីល្បាញ កិត្តិយសល្អ ប្រកបកិច្ចការធំបានសម្រេច។" },
+    24: { type: "ល្អ", score: 74, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "ពឹងផ្អែកលើសមត្ថភាពផ្ទាល់ខ្លួនយ៉ាងរឹងមាំ អាចសម្រេចការងារបានល្អ។" },
+    25: { type: "ល្អណាស់", score: 93, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "មានសំណាងល្អខ្ពស់ បោះជំហានទៅណាមានគេជួយជ្រោមជ្រែងជានិច្ច។" },
+    26: { type: "អាក្រក់ណាស់", score: 12, stars: "❌", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "មានឧបសគ្គធំៗដេញតាមរារាំងភាពជោគជ័យ ត្រូវប្រុងប្រយ័ត្ន។" },
+    27: { type: "ល្អ", score: 70, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "អាចមានលាភសំណាងចៃដន្យ និងទទួលបានជ័យជំនះលើគូប្រកួត។" },
+    28: { type: "ល្អណាស់", score: 97, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "បុណ្យស័ក្តិឡើងខ្ពស់ត្រដែត រកស៊ីមានបានលឿនរហ័ស។" },
+    29: { type: "អាក្រក់", score: 40, stars: "✦✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "សំណាងល្អនិងគ្រោះអាក្រក់ កើតមានឡើងទន្ទឹមគ្នា ពិបាកទប់ទល់។" },
+    30: { type: "ល្អណាស់", score: 89, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "ទទួលបាននូវលាភសំណាង និងកិត្តិយសដ៏ខ្ពង់ខ្ពស់ក្នុងសង្គម។" },
+    31: { type: "ល្អណាស់", score: 95, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "មានសំណាងខ្ពស់រកលុយងាយ អាចទទួលជោគជ័យគ្រប់ការងារទាំងអស់។" },
+    32: { type: "ល្អ", score: 83, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "មានប្រាជ្ញាឈ្លាសវៃវាងវៃខ្លាំង មានភាពរីកចម្រើនលឿន។" },
+    33: { type: "អាក្រក់ណាស់", score: 10, stars: "❌", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ជួបឧបសគ្គមិនចេះអស់មិនចេះហើយ ពិបាកនឹងទទួលបានជោគជ័យ។" },
+    34: { type: "ធម្មតា", score: 48, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "ត្រូវចេះទប់ចិត្តមានលំនឹង កុំលោភលន់ហួសហេតុទើបមិនហិនហោច។" },
+    35: { type: "អាក្រក់", score: 33, stars: "✦✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ឧបសគ្គច្រើន ជួបភាពលំបាក និងការរអាក់រអួលក្នុងឆាកជីវិត។" },
+    36: { type: "ល្អ", score: 77, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "អាចប្រែក្លាយឧបសគ្គឱ្យទៅជាសំណាង ធ្វើអ្វីៗបានដូចបំណងប្រាថ្នា។" },
+    37: { type: "ធម្មតា", score: 52, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "អាចទទួលបាននូវកិត្តិយសល្បីល្បាញ តែពិបាកប្រមូលលាភសំណាង។" },
+    38: { type: "ល្អណាស់", score: 99, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "ដួងជតាខ្ពស់ត្រដែត អនាគតភ្លឺស្វាងត្រចះត្រចង់ខ្លាំង។" },
+    39: { type: "ធម្មតា", score: 50, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "មានសំណាងឬឧបសគ្គ ផ្លាស់ប្ដូរមកមិនទៀងទាត់ឡើយ។" },
+    40: { type: "ល្អណាស់", score: 91, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "មានសំណាងល្អ អនាគតល្អហើយភ្លឺស្វាងត្រចះត្រចង់។" },
+    41: { type: "អាក្រក់", score: 38, stars: "✦✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ការរកស៊ីជួបហានិភ័យខ្ពស់ ប្រឈមនឹងការខាតបង់លុយកាក់。 " },
+    42: { type: "ល្អ", score: 71, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "បើមានចិត្តអត់ធ្មត់ សំណាងអាក្រក់ទាំងឡាយអាចក្លាយជាមានលាភវិញ។" },
+    43: { type: "អាក្រក់", score: 29, stars: "✦✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ទោះខំប្រឹងយ៉ាងណាក៏ពិបាកសម្រេចដូចបំណងប្រា្នដេរ។" },
+    44: { type: "ល្អ", score: 81, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "មានសំណាងល្អតាមថែរក្សា មានភាពរីកចម្រើនទៅមុខជានិច្ច។" },
+    45: { type: "អាក្រក់ណាស់", score: 14, stars: "❌", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ជួបឧបសគ្គបុកមករកមិនចេះអស់ មិនសូវមានសិរីសួស្តីឡើយ។" },
+    46: { type: "ល្អណាស់", score: 92, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "មានទេវតា ឬវត្ថុសក្តិសិទ្ធិតាមថែរក្សា អាចប្រកបជំនួញធំបាន។" },
+    47: { type: "ល្អណាស់", score: 96, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "មានទាំងកិត្តិយសខ្ពង់ខ្ពស់ មានទាំងទ្រព្យសម្បត្តិស្តុកស្តម្ភ។" },
+    48: { type: "ធម្មតា", score: 45, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "មានឧបសគ្គលាយឡំ ចាក់ស្រែះជាមួយសំណាង បាក់ទឹកចិត្តខ្លះបានខ្លះ។" },
+    49: { type: "ធម្មតា", score: 47, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "មានឧបសគ្គហើយ ក៏មានសំណាងរត់មកជាមួយគ្នាដែរ។" },
+    50: { type: "ធម្មតា", score: 50, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "ជីវិតមានឧបសគ្គខ្លះ ហើយក៏មានសំណាងល្អលោតមកខ្លះ។" },
+    51: { type: "ល្អ", score: 73, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "ឱ្យតែមានការតាំងចិត្ត ខិតខំប្រឹងប្រែង នឹងទទួលបាននូវផលប្រយោជន៍។" },
+    52: { type: "អាក្រក់", score: 36, stars: "✦✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ប្រុងប្រយ័ត្ន ពេលបានលាភសំណាងភ្លាម នឹងមានឧបសគ្គតាមបោកបក់ពីក្រោយ។" },
+    53: { type: "ធម្មតា", score: 44, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "ខិតខំប្រឹងប្រែងខ្លាំងណាស់ តែទទួលបានលទ្ធផលត្រឡប់មកវិញតិចតួច។" },
+    54: { type: "អាក្រក់", score: 32, stars: "✦✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "មើលទៅល្អតែសំបកក្រៅ តែការពិតខាងក្នុងមានឧបសគ្គ និងគ្រោះថ្នាក់។" },
+    55: { type: "អាក្រក់ណាស់", score: 8, stars: "❌", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ជួបឧបសគ្គជាន់ៗលើគ្នា មិនចេះអស់មិនចេះហើយ អាចមានគ្រោះថ្នាក់។" },
+    56: { type: "ល្អ", score: 79, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "មានការតស៊ូខិតខំប្រឹងប្រែងខ្ពស់ អាចកែប្រែនូវជោគវាសនាអាក្រក់បាន។" },
+    57: { type: "ធម្មតា", score: 56, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "បច្ចុប្បន្នមានឧបសគ្គច្រើន តែសំណាងល្អធំនឹងរត់មកពីក្រោយ។" },
+    58: { type: "អាក្រក់", score: 27, stars: "✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ពេលជួបនឹងបញ្ហាច្រើន ចិត្តមិននឹងន វង្វេងវង្វាន់ពិបាកសម្រេចចិត្ត។" },
+    59: { type: "ធម្មតា", score: 51, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "អារម្មណ៍មិនសូវស្ងប់ ចិត្តច្របូកច្របល់ ពិបាកសម្រេចចិត្តរឿងធំ។" },
+    60: { type: "អាក្រក់", score: 31, stars: "✦✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ជួបឧបសគ្គច្រើន រកស៊ីមិនសូវកាក់កប និងហត់នឿយចិត្ត។" },
+    61: { type: "អាក្រក់", score: 34, stars: "✦✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "មានរឿងស្មុគស្មាញវាយលុកច្រើន ពិបាកសម្រេចអ្វីៗដែលបានប៉ង។" },
+    62: { type: "ល្អ", score: 72, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "ឱ្យតែមានការតាំងចិត្ត ខិតខំប្រឹងប្រែង នឹងទទួលបាននូវផលប្រយោជន៍។" },
+    63: { type: "អាក្រក់", score: 21, stars: "✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ខំប្រឹងខ្លាំងដូចក្របី តែគ្មានទទួលបានផលប្រយោជន៍អ្វីត្រឡប់មកវិញឡើយ។" },
+    64: { type: "ល្អ", score: 85, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "មានសំណាងល្អដេញតាម អាចប្រកបមុខជំនួញខ្នាតធំដុំបាន។" },
+    65: { type: "ធម្មតា", score: 54, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "ដួងរាសីល្អបង្គួរ តែខ្លួនឯងខ្វះទំនុកចិត្តក្នុងការធ្វើរឿងធំ។" },
+    66: { type: "ល្អណាស់", score: 98, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "ធ្វើអ្វីៗតែងបានសម្រេចដូចចិត្តប្រាថ្នា មាសប្រាក់ហូរចូលគ្រប់ទិស។" },
+    67: { type: "ល្អ", score: 77, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "ប្រសិនបើចេះសម្លឹងមើល និងក្តាប់ជាប់ឱកាសល្អ អាចទទួលបានជោគជ័យ។" },
+    68: { type: "អាក្រក់", score: 26, stars: "✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ស្ថានភាពមិននឹងន ងាយចាញ់បោកគេ និងជួបឧបសគ្គបោកបក់ច្រើន។" },
+    69: { type: "អាក្រក់", score: 23, stars: "✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "រកស៊ីប្រឈមការខាតបង់ខ្ពស់ ជួបភាពច្របូកច្របល់បាក់ទឹកចិត្ត។" },
+    70: { type: "ធម្មតា", score: 49, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "សំណាងល្អឬអាក្រក់ គឺអាស្រ័យលើការចេះប្រុងប្រយ័ត្នរបស់ខ្លួន។" },
+    71: { type: "ធម្មតា", score: 51, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "សំណាងល្អនិងឧបសគ្គ គឺអាស្រ័យលើសកម្មភាពផ្ទាល់ខ្លួនជាចម្បង។" },
+    72: { type: "ល្អ", score: 80, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "មានសកម្មភាពរហ័សរហួន និងមានសំណាងល្អជួយរុញច្រានពីក្រោយ។" },
+    73: { type: "ធម្មតា", score: 46, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "បើសិនជាចិត្តរុញរា ខ្វះភាពក្លាហាន គឺពិបាកនឹងទទួលជោគជ័យណាស់។" },
+    74: { type: "ធម្មតា", score: 53, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "មានសំណាងល្អខ្លះលោតចូលមក ហើយក៏មានគ្រោះអាក្រក់លាយឡំដែរ។" },
+    75: { type: "អាក្រក់", score: 24, stars: "✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "ការងាររកស៊ីងាយខាតបង់ឱកាសមាស និងអាចហិនហោចទ្រព្យសម្បត្តិ។" },
+    76: { type: "ល្អ", score: 74, stars: "✦✦✦✦", color: "#60a5fa", glow: "0 0 25px rgba(96, 165, 250, 0.3)", detail: "ឆ្លងកាត់ការពិបាកមុន នឹងទទួលបានសេចក្តីសុខស្រួលតាមក្រោយ។" },
+    77: { type: "ធម្មតា", score: 50, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "មានលាភហូរចូលខ្លះ មានបង់ចេញទៅវិញខ្លះ មិនទាន់សុខសាន្តទាំងស្រុងទេ។" },
+    78: { type: "ធម្មតា", score: 44, stars: "✦✦✦", color: "#cbd5e1", glow: "0 0 25px rgba(203, 213, 225, 0.15)", detail: "អនាគតមិនសូវភ្លឺស្វាងខ្លាំងទេ ហើយក៏មិនសូវមានទ្រព្យសម្បត្តិធំដុំដែរ។" },
+    79: { type: "អាក្រក់", score: 19, stars: "✦", color: "#f87171", glow: "0 0 25px rgba(248, 113, 113, 0.3)", detail: "រកបានមកហើយតែត្រឡប់ជាខាតបង់ទៅវិញដូចខ្យល់ ខិតខំឥតប្រយោជន៍។" },
+    80: { type: "ល្អណាស់", score: 97, stars: "✦✦✦✦✦", color: "#34d399", glow: "0 0 25px rgba(52, 211, 153, 0.3)", detail: "ដួងរាសីខ្ពស់ត្រដែត អាចទទួលបានជោគជ័យធំធេងលើគ្រប់វិស័យ។" }
 };
 
-function predictPhone(){
+function runAnalysis() {
+    const phoneInput = document.getElementById("phone");
+    const phone = phoneInput.value.replace(/\D/g, '');
 
-    const phone = document
-        .getElementById("phone")
-        .value
-        .replace(/\D/g,'');
-
-    if(phone.length < 9 || phone.length > 10){
-        alert("សូមបញ្ចូលលេខទូរស័ព្ទឱ្យបាន 9 ឬ 10 ខ្ទង់");
+    if (phone.length < 9 || phone.length > 10) {
+        alert("សូមបញ្ចូលលេខទូរស័ព្ទឱ្យបានត្រឹមត្រូវ ៩ ឬ ១០ ខ្ទង់!");
         return;
     }
 
     const last6 = phone.slice(-6);
+    let result = Math.round(((Number(last6) / 80) % 1) * 80);
+    if (result === 0) { result = 80; }
 
-    let result = Math.ceil(
-        ((Number(last6) / 80) % 1) * 80
-    );
+    const data = divinationData[result] || divinationData[1];
+    
+    const scanLine = document.getElementById("scanLine");
+    const placeholderView = document.getElementById("placeholderView");
+    const displayView = document.getElementById("displayView");
 
-    if(result === 0){
-        result = 80;
-    }
+    scanLine.style.display = "block";
+    placeholderView.style.display = "none";
+    displayView.style.display = "none";
 
-    const data = results[result];
+    setTimeout(() => {
+        scanLine.style.display = "none";
+        displayView.style.display = "block";
 
-    document.getElementById("resultBox").style.display = "block";
-    document.getElementById("finalNumber").textContent = result;
+        document.getElementById("finalNum").textContent = result;
+        document.getElementById("summaryText").textContent = data.detail;
+        document.getElementById("fortuneStars").textContent = data.stars;
+        document.getElementById("energyValue").textContent = data.score + "%";
 
-    if(typeof data === "string"){
-        document.getElementById("description").textContent = data;
-    }
-    else if(data){
-        document.getElementById("description").textContent =
-            data.type + " = " + data.detail;
-    }
-    else{
-        document.getElementById("description").textContent =
-            "មិនទាន់មានទិន្នន័យ";
-    }
+        const scoreTag = document.getElementById("scoreTag");
+        scoreTag.textContent = `កម្រិតជោគជតា៖ ${data.type}`;
+        scoreTag.className = "score-tag";
+        
+        if(data.type === "ល្អណាស់") scoreTag.classList.add("tag-excellent");
+        else if(data.type === "ល្អ") scoreTag.classList.add("tag-good");
+        else if(data.type === "ធម្មតា") scoreTag.classList.add("tag-fair");
+        else scoreTag.classList.add("tag-poor");
+
+        const ring = document.getElementById("progressRing");
+        const radius = 65;
+        const circumference = 2 * Math.PI * radius;
+        const offset = circumference - (data.score / 100) * circumference;
+        
+        ring.style.stroke = data.color;
+        ring.style.strokeDashoffset = offset;
+
+        document.getElementById("circleGlow").style.boxShadow = data.glow;
+
+        const energyBar = document.getElementById("energyBar");
+        energyBar.style.width = "0%";
+        setTimeout(() => {
+            energyBar.style.backgroundColor = data.color;
+            energyBar.style.width = data.score + "%";
+        }, 50);
+
+    }, 1200);
 }
-
 </script>
 
 </body>
-</html>s
+</html>

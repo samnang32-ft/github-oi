@@ -1,79 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="km">
 <head>
-<meta charset="UTF-8">
-<title>Electricity Cost Calculator</title>
-
-<style>
-body{
-    font-family: Arial;
-    background:#6F8CD6;
-    color:white;
-}
-.box{
-    width:400px;
-    margin:60px auto;
-    background:#A1BBCC;
-    padding:25px;
-    border-radius:10px;
-}
-input,button{
-    width:100%;
-    padding:10px;
-    margin:8px 0;
-    border:none;
-    border-radius:6px;
-}
-button{
-    background:#22c55e;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-}
-.result{
-    background:#4C7A52;
-    padding:15px;
-    margin-top:15px;
-    border-radius:6px;
-    display:none;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ម៉ាស៊ីនគិតលេខអគ្គិសនី</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Moul&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Battambang', sans-serif;
+            background-color: #0b0f19;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 40%),
+                radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 40%),
+                radial-gradient(at 50% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 40%);
+            background-attachment: fixed;
+        }
+        .khmer-title {
+            font-family: 'Moul', serif;
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen flex items-center justify-center p-4 text-white">
 
-<div class="box">
-<h2>⚡️ ការគណនាតម្លៃនៃអគ្គីសនី</h2>
+    <div class="w-full max-w-md bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] p-6 space-y-6 border border-slate-800 relative">
+        
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div class="flex items-center gap-2">
+                <a href="index.html" onclick="window.history.back(); return false;" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-xl transition-all duration-200 active:scale-90 flex items-center justify-center shadow-md border border-slate-700" title="ថយក្រោយ">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                </a>
 
-គីឡូអគ្គីសនី (kWh)
-<input type="number" id="old" placeholder="បញ្ចូលគីឡូ kWh">
+                <a href="index.html" class="p-2 bg-slate-800 hover:bg-slate-700 text-cyan-400 rounded-xl transition-all duration-200 active:scale-90 flex items-center justify-center shadow-md border border-slate-700" title="ទៅទំព័រដើម">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                </a>
+            </div>
+            
+            <h1 class="khmer-title text-base md:text-lg text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 pl-2">
+                ម៉ាស៊ីនគិតលេខអគ្គិសនី 💡
+            </h1>
+        </div>
 
-តម្លៃ kWh (៛)
-<input type="number" id="price" placeholder="បញ្ចូលតម្លៃ">
+        <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-2">
+                <label class="block text-sm font-bold text-slate-300 pl-1">លេខម៉ែត្រចាស់</label>
+                <div class="relative">
+                    <input type="number" id="old_meter" value="0" min="0" 
+                           onfocus="if(this.value=='0')this.value='';" 
+                           onblur="if(this.value=='')this.value='0';"
+                           class="w-full bg-slate-950 text-cyan-400 text-xl font-bold rounded-xl px-4 py-3 border border-slate-700 focus:outline-none focus:border-cyan-400 transition-all text-center shadow-inner">
+                </div>
+            </div>
+            <div class="space-y-2">
+                <label class="block text-sm font-bold text-slate-300 pl-1">លេខម៉ែត្រថ្មី</label>
+                <div class="relative">
+                    <input type="number" id="new_meter" value="0" min="0" 
+                           onfocus="if(this.value=='0')this.value='';" 
+                           onblur="if(this.value=='')this.value='0';"
+                           class="w-full bg-slate-950 text-cyan-400 text-xl font-bold rounded-xl px-4 py-3 border border-slate-700 focus:outline-none focus:border-cyan-400 transition-all text-center shadow-inner">
+                </div>
+            </div>
+        </div>
 
-<button onclick="calculate()">គណនា</button>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+            <div id="card1" class="bg-slate-950/50 rounded-xl p-3 border border-slate-700 transition-all duration-300">
+                <div class="bg-cyan-500 text-slate-950 font-bold px-1.5 py-0.5 rounded text-center mb-1.5 text-[11px]">កម្រិតទី១</div>
+                <div class="text-white text-center space-y-0.5 font-bold">
+                    <p>0 - 10 គីឡូ</p>
+                    <p class="text-cyan-400 text-sm mt-0.5">380 ៛/គីឡូ</p>
+                </div>
+            </div>
+            <div id="card2" class="bg-slate-950/50 rounded-xl p-3 border border-slate-700 transition-all duration-300">
+                <div class="bg-emerald-500 text-slate-950 font-bold px-1.5 py-0.5 rounded text-center mb-1.5 text-[11px]">កម្រិតទី២</div>
+                <div class="text-white text-center space-y-0.5 font-bold">
+                    <p>11 - 50 គីឡូ</p>
+                    <p class="text-emerald-400 text-sm mt-0.5">480 ៛/គីឡូ</p>
+                </div>
+            </div>
+            <div id="card3" class="bg-slate-950/50 rounded-xl p-3 border border-slate-700 transition-all duration-300">
+                <div class="bg-amber-500 text-slate-950 font-bold px-1.5 py-0.5 rounded text-center mb-1.5 text-[11px]">កម្រិតទី៣</div>
+                <div class="text-white text-center space-y-0.5 font-bold">
+                    <p>51 - 200 គីឡូ</p>
+                    <p class="text-amber-400 text-sm mt-0.5">610 ៛/គីឡូ</p>
+                </div>
+            </div>
+            <div id="card4" class="bg-slate-950/50 rounded-xl p-3 border border-slate-700 transition-all duration-300">
+                <div class="bg-orange-500 text-slate-950 font-bold px-1.5 py-0.5 rounded text-center mb-1.5 text-[11px]">កម្រិតទី៤</div>
+                <div class="text-white text-center space-y-0.5 font-bold">
+                    <p>201 គីឡូឡើង</p>
+                    <p class="text-orange-400 text-sm mt-0.5">730 ៛/គីឡូ</p>
+                </div>
+            </div>
+        </div>
 
-<div class="result" id="result"></div>
-</div>
+        <div class="flex items-center justify-center gap-6 py-1">
+            <button onclick="resetForm()" class="w-16 h-16 bg-gradient-to-tr from-rose-500 to-orange-500 hover:from-rose-400 hover:to-orange-400 text-slate-950 rounded-full flex flex-col justify-center items-center shadow-[0_0_20px_rgba(244,63,94,0.2)] transition-all duration-300 active:scale-95 focus:outline-none ring-4 ring-slate-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-950 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 15H19c0 5.523-4.477 10-10 10S0 20.523 0 15 4.477 5 10 5c2.478 0 4.74.903 6.47 2.398L20 4v5h-5" />
+                </svg>
+                <span class="text-[10px] font-bold text-slate-950 mt-0.5">សារថ្មី</span>
+            </button>
 
-<script>
-function calculate(){
-    let old = document.getElementById("old").value;
-    let price = document.getElementById("price").value;
+            <button onclick="calculateElectricity()" class="w-20 h-20 bg-gradient-to-tr from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 rounded-full flex flex-col justify-center items-center shadow-[0_0_25px_rgba(34,211,238,0.3)] transition-all duration-300 active:scale-95 focus:outline-none ring-4 ring-slate-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-950 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                <span class="text-xs font-bold text-slate-950 mt-0.5">គណនា</span>
+            </button>
+        </div>
 
-    if(old=="" || price==""){
-        alert("Please enter all values");
-        return;
-    }
+        <div class="space-y-4">
+            <div class="grid grid-cols-3 gap-2">
+                <div class="flex flex-col items-center justify-center text-center">
+                    <span class="text-[11px] text-slate-300 font-bold mb-1">ភ្លើងប្រើអស់</span>
+                    <div class="bg-slate-950 border border-slate-700/80 w-20 h-20 rounded-full flex flex-col justify-center items-center shadow-md">
+                        <span id="units_used" class="text-sm font-black text-white">—</span>
+                        <span class="text-[9px] text-slate-400 font-bold">គីឡូ</span>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center justify-center text-center">
+                    <span class="text-[11px] text-slate-300 font-bold mb-1">តម្លៃ ១គីឡូ</span>
+                    <div class="bg-slate-950 border border-slate-700/80 w-20 h-20 rounded-full flex flex-col justify-center items-center shadow-md">
+                        <span id="applied_rate" class="text-sm font-black text-cyan-400">—</span>
+                        <span class="text-[9px] text-slate-400 font-bold">រៀល</span>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center justify-center text-center">
+                    <span class="text-[11px] text-slate-300 font-bold mb-1">ចាស់➔ថ្មី</span>
+                    <div class="bg-slate-950 border border-slate-700/80 w-20 h-20 rounded-full flex flex-col justify-center items-center p-1 shadow-md">
+                        <span id="meter_range" class="text-[10px] font-black text-slate-200 truncate max-w-full px-1">—</span>
+                        <span class="text-[9px] text-slate-400 font-bold">ម៉ែត្រ</span>
+                    </div>
+                </div>
+            </div>
 
-    let used = old;
-    let total = used * price;
+            <div class="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 rounded-xl p-5 text-center border border-slate-700 shadow-md relative overflow-hidden">
+                <div class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-yellow-400 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                    <span id="total_price">0</span> <span class="text-xl font-normal text-white">៛</span>
+                </div>
+                <div class="text-xs text-white font-bold mt-2 uppercase tracking-widest">
+                    លុយសរុបត្រូវបង់ (រៀល)
+                </div>
+            </div>
+        </div>
 
-    document.getElementById("result").style.display="block";
-    document.getElementById("result").innerHTML =
-        "អគ្គីសនីអ្នកប្រើប្រាស់: <b>" + used + " kWh</b><br>" +
-        "តម្លៃសរុប: <b>" + total.toLocaleString() + " ៛</b>";
-}
-</script>
+    </div>
 
+    <script>
+        function calculateElectricity() {
+            const oldMeter = parseFloat(document.getElementById('old_meter').value) || 0;
+            const newMeter = parseFloat(document.getElementById('new_meter').value) || 0;
+
+            if (newMeter < oldMeter) {
+                alert("សូមពិនិត្យឡើងវិញ៖ លេខម៉ែត្រថ្មីមិនអាចតូចជាងលេខម៉ែត្រចាស់បានទេ!");
+                return;
+            }
+
+            const units = newMeter - oldMeter;
+            let rate = 0;
+            let activeCardId = "";
+
+            if (units <= 10) {
+                rate = 380;
+                activeCardId = "card1";
+            } else if (units <= 50) {
+                rate = 480;
+                activeCardId = "card2";
+            } else if (units <= 200) {
+                rate = 610;
+                activeCardId = "card3";
+            } else {
+                rate = 730;
+                activeCardId = "card4";
+            }
+
+            const totalCost = units * rate;
+
+            document.getElementById('units_used').innerText = units.toLocaleString();
+            document.getElementById('applied_rate').innerText = rate.toLocaleString();
+            document.getElementById('meter_range').innerText = `${oldMeter}➔${newMeter}`;
+            document.getElementById('total_price').innerText = totalCost.toLocaleString();
+
+            const cards = ["card1", "card2", "card3", "card4"];
+            const borderColors = { card1: "#22d3ee", card2: "#34d399", card3: "#fbbf24", card4: "#f97316" };
+
+            cards.forEach(id => {
+                const el = document.getElementById(id);
+                if (id === activeCardId) {
+                    el.style.transform = "scale(1.03)";
+                    el.style.borderColor = borderColors[id];
+                    el.style.borderWidth = "2px";
+                    el.style.backgroundColor = "rgba(15, 23, 42, 0.9)";
+                    el.style.opacity = "1";
+                } else {
+                    el.style.transform = "scale(1)";
+                    el.style.borderColor = "rgba(51, 65, 85, 0.5)";
+                    el.style.borderWidth = "1px";
+                    el.style.backgroundColor = "rgba(2, 6, 23, 0.4)";
+                    el.style.opacity = "0.5";
+                }
+            });
+        }
+
+        function resetForm() {
+            document.getElementById('old_meter').value = "0";
+            document.getElementById('new_meter').value = "0";
+            document.getElementById('units_used').innerText = "—";
+            document.getElementById('applied_rate').innerText = "—";
+            document.getElementById('meter_range').innerText = "—";
+            document.getElementById('total_price').innerText = "0";
+
+            const cards = ["card1", "card2", "card3", "card4"];
+            cards.forEach(id => {
+                const el = document.getElementById(id);
+                el.style.transform = "scale(1)";
+                el.style.borderColor = "rgba(51, 65, 85, 0.5)";
+                el.style.borderWidth = "1px";
+                el.style.backgroundColor = "rgba(2, 6, 23, 0.4)";
+                el.style.opacity = "1";
+            });
+        }
+    </script>
 </body>
 </html>
